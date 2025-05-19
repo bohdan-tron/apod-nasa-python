@@ -24,7 +24,7 @@ if selected_date > today:
 api_query = f"{NASA_API_ENDPOINT}?api_key={api_key}&date={selected_date}"
 
 
-@st.cache_resource
+@st.cache_data
 def get_nasa_image(url_to_load) -> Optional[Dict[str, Any]]:
   r = req.get(url_to_load, timeout=10)
   data = r.json()
@@ -32,7 +32,7 @@ def get_nasa_image(url_to_load) -> Optional[Dict[str, Any]]:
 
 
 with st.spinner('Fetching data from NASA API...'):
-  st.cache_resource.clear()
+  st.cache_data.clear()
   data: Dict[str, Any] | None = get_nasa_image(api_query)
 
 
