@@ -13,10 +13,14 @@ api_query = f"{NASA_API_ENDPOINT}?api_key={api_key}"
 
 today = date.today()
 selected_date = st.date_input(
-    "Select date",
-    value=today,
-    max_value=today
+  "Select date",
+  value=today
 )
+
+if selected_date > today:
+  st.error("Please select a date no later than today")
+  st.stop()
+
 api_query = f"{NASA_API_ENDPOINT}?api_key={api_key}&date={selected_date}"
 
 
